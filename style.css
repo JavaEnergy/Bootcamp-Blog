@@ -1,0 +1,214 @@
+@font-face {
+  font-family: FiraGO-400;
+  src: url(./firago-latin-400-normal.woff);
+}
+@font-face {
+  font-family: FiraGO-500;
+  src: url(./firago-latin-500-normal.woff);
+}
+@font-face {
+  font-family: FiraGO-700;
+  src: url(./firago-latin-700-normal.woff);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 28px 75px;
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(228, 227, 235, 1);
+}
+
+header button {
+  background-color: rgba(93, 55, 243, 1);
+  padding: 10px 20px;
+  border: none;
+  color: #ffffff;
+  border-radius: 8px;
+  font-family: FiraGO-500;
+}
+body {
+  position: relative;
+}
+main {
+  background-color: rgba(243, 242, 250, 1);
+}
+
+.head {
+  font-family: FiraGO-700;
+  font-size: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 89px;
+  padding-right: 76px;
+}
+.head img {
+  max-width: 624px;
+  padding-top: 64px;
+}
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.scrollable-nav {
+  max-width: 684px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.nav-items {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  padding-top: 64px;
+  font-family: FiraGO-500;
+  font-size: 12px;
+  height: auto;
+  max-width: 684px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.nav-items li {
+  display: inline-block;
+  border-radius: 30px;
+  padding: 8px 16px;
+}
+.nav-items li:hover {
+  cursor: pointer;
+}
+
+/* ////////////////////////////////////////////// */
+.scrollable-nav::-webkit-scrollbar {
+  width: 5px;
+}
+
+.blogs {
+  padding: 64px 76px 96px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 32px;
+  grid-row-gap: 56px;
+}
+
+.blog .main-img {
+  width: 100%;
+}
+
+.blog {
+  font-family: FiraGO-500;
+  font-size: 16px;
+  line-height: 28px;
+  color: rgba(26, 26, 31, 1);
+  text-align: left;
+}
+
+.blog h2 {
+  /* padding: 14px 0 8px; */
+}
+
+.blog h6 {
+  font-size: 12px;
+  font-family: FiraGO-400;
+  color: rgba(133, 133, 141, 1);
+}
+
+.blog h1 {
+  font-size: 20px;
+  padding: 16px 0;
+}
+
+.blog .categories {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  max-width: 100%;
+}
+.blog .categories span {
+  padding: 6px 10px;
+  border-radius: 30px;
+  background-color: rgba(0, 179, 255, 0.308);
+  font-size: 12px;
+}
+.blog .categories span:hover {
+  cursor: pointer;
+}
+.blog p {
+  color: rgba(64, 64, 73, 1);
+  font-family: FiraGO-400;
+  margin: 16px 0;
+  max-height: 56px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.blog a {
+  font-size: 14px;
+  color: rgba(93, 55, 243, 1);
+  text-decoration: none;
+}
+
+.pointer:hover {
+  cursor: pointer;
+}
+.log-in {
+  font-family: FiraGO-500;
+  font-size: 14px;
+  color: rgba(26, 26, 31, 1);
+  width: 480px;
+  background-color: #fff;
+  border-radius: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99;
+}
+.log-in h1 {
+  margin: 0 auto;
+}
+
+.enter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: FiraGO-700;
+  font-size: 24px;
+  padding-top: 40px;
+}
+.log-in input {
+  padding: 12px 0 12px 16px;
+  text-align: start;
+  color: rgba(133, 133, 141, 1);
+  border: 1.5px solid rgba(93, 55, 243, 1);
+  border-radius: 12px;
+  font-family: FiraGO-400;
+  margin-bottom: 24px;
+}
+.log-in button {
+  color: #fff;
+  padding: 10px 20px;
+  background-color: rgba(93, 55, 243, 1);
+  font-family: FiraGO-500;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 40px;
+}
+.input-text {
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px;
+}
+
+.input-text p {
+  margin-bottom: 8px;
+}
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(26, 26, 31, 0.24); /* Opacity as 24% */
+  z-index: 98; /* Ensure it's below the login section */
+}
