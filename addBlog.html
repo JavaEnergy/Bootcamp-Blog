@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Blog</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="addBlog.css" />
+  </head>
+  <body>
+    <header>
+      <img src="./LOGO-02 3 (1).png" alt="" />
+    </header>
+    <main>
+      <div class="arrow">
+        <img src="./add-blog-arrow.png" alt="" />
+      </div>
+      <section class="form">
+        <form>
+          <h1>ბლოგის დამატება</h1>
+          <div id="drop-area" class="drop">
+            <img src="./folder-add.png" alt="" />
+            <p>
+              ჩააგდეთ ფაილი აქ ან
+              <b> <span class="underline">აირჩიეთ ფაილი</span></b>
+            </p>
+            <input
+              type="file"
+              id="fileInput"
+              name="fileInput"
+              style="display: none"
+            />
+          </div>
+          <div class="author-header">
+            <div class="author">
+              <label for="author">ავტორი *</label><br />
+              <input
+                class="input"
+                placeholder="შეიყვნეთ ავტორი"
+                type="text"
+                id="author"
+                name="author"
+                pattern=".{4,}"
+                title="Minimum 4 characters required"
+              />
+              <p>
+                <span class="symbols"> • მინიმუმ 4 სიმბოლო </span><br />
+                <span class="words">• მინიმუმ ორი სიტყვა </span><br />
+                <span class="only-georgian">• მხოლოდ ქართული სიმბოლოები</span>
+              </p>
+            </div>
+            <div class="head">
+              <label for="header">სათური *</label><br />
+              <input
+                type="text"
+                id="header"
+                placeholder="შეიყვნეთ სათაური"
+                name="header"
+                class="input"
+              />
+              <p class="header-min-symnol">მინიმუმ 2 სიმბოლო</p>
+            </div>
+          </div>
+
+          <label class="descr" for="description">აღწერა * </label> <br />
+          <textarea
+            id="description"
+            name="description"
+            placeholder="შეიყვნეთ აღწერა"
+          ></textarea>
+          <p class="description-min-symnol">მინიმუმ 2 სიმბოლო</p>
+          <div class="date-category">
+            <div class="published-date">
+              <label for="date">გამოქვეყნების თარიღი *</label> <br />
+              <input type="date" id="date" name="date" class="input" />
+            </div>
+            <div class="category">
+              <label for="category">კატეგორია *</label> <br />
+              <select id="category" name="category" class="input categor">
+                <option value="" disabled selected>აირჩიეთ კატეგორია</option>
+                <option value="category1">Category 1</option>
+                <option value="category2">Category 2</option>
+              </select>
+            </div>
+          </div>
+          <label for="email">ელ-ფოსტა</label> <br />
+          <input
+            class="email input"
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Example@redberry.ge"
+          />
+          <br />
+          <div class="button">
+            <button>გამოქვეყნება</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

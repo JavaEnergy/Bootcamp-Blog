@@ -46,7 +46,7 @@
       <div class="log-in">
         <div class="enter"><h1>შესვლა</h1></div>
         <div class="input-text">
-          <p>ელ-ფოსტა</p>
+          <p class="input-p">ელ-ფოსტა</p>
           <input
             type="email"
             id="email"
@@ -54,10 +54,22 @@
             placeholder="Example@redberry.ge"
             required
           />
+          <div class="error">
+            <!-- image არის შესაცვლელი -->
+            <img src="./Vector.png" alt="" />
+            <p class="error-p">ელ-ფოსტა არ მოიძებნა</p>
+          </div>
+
           <button>შესვლა</button>
         </div>
       </div>
-      <div class="backdrop"></div>
+      <div class="log-in-success">
+        <!-- image არის შესაცვლელი -->
+        <img src="./Vector-success.png" alt="" />
+        <!-- image არის შესაცვლელი -->
+        <h1>წარმატებული ავტორიზაცია</h1>
+        <button>კარგი</button>
+      </div>
       <div class="backdrop"></div>
     </main>
     <script src="./script.js"></script>

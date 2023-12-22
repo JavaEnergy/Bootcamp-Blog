@@ -104,10 +104,6 @@ main {
   text-align: left;
 }
 
-.blog h2 {
-  /* padding: 14px 0 8px; */
-}
-
 .blog h6 {
   font-size: 12px;
   font-family: FiraGO-400;
@@ -162,7 +158,8 @@ main {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 99;
+  z-index: 95;
+  display: none;
 }
 .log-in h1 {
   margin: 0 auto;
@@ -183,7 +180,6 @@ main {
   border: 1.5px solid rgba(93, 55, 243, 1);
   border-radius: 12px;
   font-family: FiraGO-400;
-  margin-bottom: 24px;
 }
 .log-in button {
   color: #fff;
@@ -192,7 +188,7 @@ main {
   font-family: FiraGO-500;
   border-radius: 8px;
   border: none;
-  margin-bottom: 40px;
+  margin: 24px 0 40px;
 }
 .input-text {
   display: flex;
@@ -200,7 +196,7 @@ main {
   padding: 0 24px;
 }
 
-.input-text p {
+.input-p {
   margin-bottom: 8px;
 }
 .backdrop {
@@ -209,6 +205,56 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(26, 26, 31, 0.24); /* Opacity as 24% */
-  z-index: 98; /* Ensure it's below the login section */
+  background-color: rgba(26, 26, 31, 0.24);
+  z-index: 90;
+  display: none;
+}
+.error-p {
+  color: rgba(234, 25, 25, 1);
+  margin: 0;
+}
+
+.error {
+  display: flex;
+  text-align: center;
+  gap: 8px;
+  margin-top: 8px;
+  display: none;
+}
+
+.log-in-success {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  z-index: 95;
+  border-radius: 12px;
+  display: none;
+}
+.log-in-success img {
+  max-width: 100%;
+  width: 53px;
+  height: 53px;
+  margin: 69px auto 16px;
+}
+
+.log-in-success h1 {
+  font-family: FiraGO-700;
+  font-size: 20px;
+}
+.log-in-success button {
+  font-family: FiraGO-500;
+  font-size: 14px;
+  width: 432px;
+  height: 40px;
+  background-color: rgba(93, 55, 243, 1);
+  border-radius: 8px;
+  border: none;
+  margin: 0 auto;
+  margin: 48px 24px 40px;
+  color: rgba(255, 255, 255, 1);
 }
