@@ -10,21 +10,40 @@
   font-family: FiraGO-700;
   src: url(./firago-latin-700-normal.woff);
 }
-
-body {
+* {
   font-family: FiraGO-400;
   color: rgba(26, 26, 31, 1);
+}
+body {
   position: relative;
+  height: 100vh;
+  /* overflow: hidden; */
 }
 .arrow {
   position: absolute;
   top: 120px;
   left: 76px;
 }
-.underline {
+.underline label {
   text-decoration: underline;
+  font-family: FiraGO-700;
+  font-size: 14px;
+  cursor: pointer;
 }
-
+#fileList {
+  margin-top: 5px;
+}
+#fileinfo {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  justify-content: space-between;
+}
+.img-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 header {
   display: flex;
   background-color: #fff;
@@ -53,13 +72,29 @@ form h1 {
   border: 2px dashed #ccc;
   padding: 20px;
   text-align: center;
-  cursor: pointer;
   background-color: rgba(244, 243, 255, 1);
   padding: 48px 0;
   border-radius: 12px;
   margin-bottom: 24px;
 }
-
+#uploadedFile {
+  display: none;
+}
+#fileinfo {
+  width: 600px;
+  height: 56px;
+  border-radius: 12px;
+  background-color: rgba(242, 242, 250, 1);
+  margin: 8px 0 24px;
+}
+#fileName {
+  font-size: 14px;
+  font-family: FiraGO-500;
+  text-align: left;
+}
+#deleteImage {
+  cursor: pointer;
+}
 .drop p {
   padding-top: 24px;
   font-family: FiraGO-500;
@@ -89,6 +124,7 @@ textarea {
   border-radius: 12px;
   padding: 12px 16px;
   margin: 8px 0;
+  resize: none;
 }
 
 .description-min-symnol {
@@ -129,8 +165,23 @@ form button {
   width: 288px;
   padding: 10px 0;
   margin: 40px 0 110px;
+  cursor: pointer;
 }
 
 .button {
   text-align: right;
+}
+
+.email-error {
+  margin-top: 8px;
+  width: 288px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  display: none;
+}
+
+.email-error p {
+  color: rgba(234, 25, 25, 1);
 }

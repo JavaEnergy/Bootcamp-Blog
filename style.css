@@ -51,23 +51,22 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 .scrollable-nav {
-  max-width: 684px;
-  overflow-x: auto;
-  white-space: nowrap;
+  max-width: 1200px;
 }
 .nav-items {
   list-style: none;
   display: flex;
+  flex-wrap: wrap;
   gap: 24px;
   padding-top: 64px;
   font-family: FiraGO-500;
   font-size: 12px;
   height: auto;
-  max-width: 684px;
-  overflow-x: auto;
-  white-space: nowrap;
+  max-width: 900px;
+  justify-content: center;
 }
 
 .nav-items li {
