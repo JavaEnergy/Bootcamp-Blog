@@ -4,22 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Blog</title>
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="addBlog.css" />
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/addBlog.css" />
   </head>
   <body>
     <header>
-      <img src="./LOGO-02 3 (1).png" alt="" />
+      <img src="../images/LOGO-02 3 (1).png" alt="" />
     </header>
     <main>
       <div class="arrow">
-        <a href="./index.html"> <img src="./add-blog-arrow.png" alt="" /> </a>
+        <a href="/index.html">
+          <img src="../images/add-blog-arrow.png" alt="" />
+        </a>
       </div>
       <section class="form">
         <form>
           <h1>ბლოგის დამატება</h1>
           <div id="drop-area" class="drop">
-            <img src="./folder-add.png" alt="" />
+            <img src="../images/folder-add.png" alt="" />
             <p>
               ჩააგდეთ ფაილი აქ ან
               <span class="underline">
@@ -34,10 +36,10 @@
             <h5 id="fileName">ატვირთეთ ფოტო</h5>
             <div id="fileinfo">
               <div class="img-head">
-                <img src="./uploaded-icon.png" alt="" />
+                <img src="../images/uploaded-icon.png" alt="" />
                 <div id="UploadedfileName"></div>
               </div>
-              <img src="./x.png" alt="" id="deleteImage" />
+              <img src="../images/x.png" alt="" id="deleteImage" />
             </div>
           </div>
 
@@ -83,13 +85,16 @@
               <label for="date">გამოქვეყნების თარიღი *</label> <br />
               <input type="date" id="date" name="date" class="input" />
             </div>
-            <div class="category">
+            <div class="category" id="categoryContainer">
               <label for="category">კატეგორია *</label> <br />
-              <select id="category" name="category" class="input categor">
-                <option value="" disabled selected>აირჩიეთ კატეგორია</option>
-                <option value="category1">Category 1</option>
-                <option value="category2">Category 2</option>
-              </select>
+              <div id="category" class="input"></div>
+
+              <img id="arrow-down" src="../images/arrow-down.png" alt="" />
+              <section class="nav">
+                <nav class="scrollable-nav">
+                  <ul class="nav-items"></ul>
+                </nav>
+              </section>
             </div>
           </div>
           <label for="email">ელ-ფოსტა</label> <br />
@@ -102,7 +107,7 @@
           />
           <br />
           <div class="email-error">
-            <img src="./Vector.png" alt="" />
+            <img src="../images/Vector.png" alt="" />
             <p class="err">მეილი უნდა მთავრდებოდეს @redberry.ge-ით</p>
           </div>
           <br />
@@ -112,7 +117,7 @@
         </form>
       </section>
     </main>
-    <script src="./addBlogPhoto.js"></script>
-    <script src="./author-header-validate.js"></script>
+    <script src="../JavaScript/addBlogPhoto.js"></script>
+    <script src="../JavaScript/author-header-validate.js"></script>
   </body>
 </html>

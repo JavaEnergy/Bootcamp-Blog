@@ -20,3 +20,23 @@ fetch("https://api.blog.redberryinternship.ge/api/categories")
   .catch((error) => {
     console.error("There was a problem with the fetch operation:", error);
   });
+
+const enterButton = document.getElementById("enterButton");
+const logInWindow = document.getElementById("logIn");
+const backdrop = document.querySelector(".backdrop");
+
+function enter() {
+  logInWindow.style.display = "block";
+  backdrop.style.display = "block";
+}
+
+enterButton.addEventListener("click", enter);
+
+const xButton = document.querySelector(".x");
+
+function back() {
+  logInWindow.style.display = "none";
+  backdrop.style.display = "none";
+}
+
+xButton.addEventListener("click", back);

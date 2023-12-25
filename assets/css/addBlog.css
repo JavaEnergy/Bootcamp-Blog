@@ -1,15 +1,16 @@
 @font-face {
   font-family: FiraGO-400;
-  src: url(./firago-latin-400-normal.woff);
+  src: url(./Fonts/firago-latin-400-normal.woff);
 }
 @font-face {
   font-family: FiraGO-500;
-  src: url(./firago-latin-500-normal.woff);
+  src: url(./Fonts/firago-latin-500-normal.woff);
 }
 @font-face {
   font-family: FiraGO-700;
-  src: url(./firago-latin-700-normal.woff);
+  src: url(./Fonts/firago-latin-700-normal.woff);
 }
+
 * {
   font-family: FiraGO-400;
   color: rgba(26, 26, 31, 1);
@@ -137,6 +138,12 @@ textarea {
   font-family: FiraGO-400;
   margin: 24px 0;
 }
+#arrow-down {
+  position: absolute;
+  top: 38px;
+  right: 16px;
+  cursor: pointer;
+}
 
 .date-category {
   display: flex;
@@ -144,9 +151,17 @@ textarea {
   font-family: FiraGO-400;
 }
 
-.categor {
-  font-size: 14px;
-  color: rgba(133, 133, 141, 1);
+.category {
+  position: relative;
+}
+#category {
+  height: 44px;
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 6px;
+  width: 288px;
 }
 .input {
   width: 288px;
@@ -185,3 +200,45 @@ form button {
 .email-error p {
   color: rgba(234, 25, 25, 1);
 }
+
+.nav {
+  box-shadow: 2px 4px 8px 0 rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(228, 227, 235, 1);
+  border-radius: 12px;
+  margin-top: 2px;
+}
+
+.nav-items {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px;
+  font-family: FiraGO-500;
+  font-size: 12px;
+  height: auto;
+  max-width: 288px;
+  justify-content: center;
+}
+
+.nav-items li {
+  display: inline-block;
+  border-radius: 30px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+}
+.nav-items li:hover {
+  cursor: pointer;
+}
+
+.category img {
+  cursor: pointer;
+}
+.category span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ../images/white-x.png */

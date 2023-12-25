@@ -1,14 +1,14 @@
 @font-face {
   font-family: FiraGO-400;
-  src: url(./firago-latin-400-normal.woff);
+  src: url(./Fonts/firago-latin-400-normal.woff);
 }
 @font-face {
   font-family: FiraGO-500;
-  src: url(./firago-latin-500-normal.woff);
+  src: url(./Fonts/firago-latin-500-normal.woff);
 }
 @font-face {
   font-family: FiraGO-700;
-  src: url(./firago-latin-700-normal.woff);
+  src: url(./Fonts/firago-latin-700-normal.woff);
 }
 
 header {
@@ -76,11 +76,6 @@ main {
 }
 .nav-items li:hover {
   cursor: pointer;
-}
-
-/* ////////////////////////////////////////////// */
-.scrollable-nav::-webkit-scrollbar {
-  width: 5px;
 }
 
 .blogs {
@@ -162,6 +157,13 @@ main {
 }
 .log-in h1 {
   margin: 0 auto;
+}
+
+.x {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
 }
 
 .enter {
@@ -256,4 +258,8 @@ main {
   margin: 0 auto;
   margin: 48px 24px 40px;
   color: rgba(255, 255, 255, 1);
+}
+
+button {
+  cursor: pointer;
 }

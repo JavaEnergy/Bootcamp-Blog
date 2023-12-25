@@ -4,18 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bootcamp Blog</title>
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
     <header>
-      <img src="./LOGO-02 3 (1).png" alt="" />
-      <button>შესვლა</button>
+      <img src="./assets/images/LOGO-02 3 (1).png" alt="" />
+      <button id="enterButton">შესვლა</button>
     </header>
     <main>
       <section class="head">
         <h1>ბლოგი</h1>
-        <img src="./Blog-1024x355 1.png" alt="" />
+        <img src="./assets/images/Blog-1024x355 1.png" alt="" />
       </section>
       <section class="nav">
         <nav class="scrollable-nav">
@@ -24,7 +24,11 @@
       </section>
       <section class="blogs">
         <div class="blog">
-          <img class="main-img" src="./unsplash_01_igFr7hd4.png" alt="" />
+          <img
+            class="main-img"
+            src="./assets/images/unsplash_01_igFr7hd4.png"
+            alt=""
+          />
           <h2>ლილე კვარაცხელია</h2>
           <h6>02.11.2023</h6>
           <h1>EOMM-ის მრჩეველთა საბჭოს ნინო ეგაძე შეუერთდა</h1>
@@ -40,10 +44,11 @@
             ბრმა დეგუსტაციის დროც დადგა. მაქსიმალური სიზუსტისთვის, ეს პროცესი
           </p>
           <a href="">სრულად ნახვა</a>
-          <img class="arrow pointer" src="./Arrow 1.png" alt="" />
+          <img class="arrow pointer" src="./assets/images/Arrow 1.png" alt="" />
         </div>
       </section>
-      <div class="log-in">
+      <div class="log-in" id="logIn">
+        <img src="/assets/images/x.png" alt="" class="x" />
         <div class="enter"><h1>შესვლა</h1></div>
         <div class="input-text">
           <p class="input-p">ელ-ფოსტა</p>
@@ -56,7 +61,7 @@
           />
           <div class="error">
             <!-- image არის შესაცვლელი -->
-            <img src="./Vector.png" alt="" />
+            <img src="./assets/images/Vector.png" alt="" />
             <p class="error-p">ელ-ფოსტა არ მოიძებნა</p>
           </div>
 
@@ -65,13 +70,13 @@
       </div>
       <div class="log-in-success">
         <!-- image არის შესაცვლელი -->
-        <img src="./Vector-success.png" alt="" />
+        <img src="./assets/images/Vector-success.png" alt="" />
         <!-- image არის შესაცვლელი -->
         <h1>წარმატებული ავტორიზაცია</h1>
         <button>კარგი</button>
       </div>
       <div class="backdrop"></div>
     </main>
-    <script src="./script.js"></script>
+    <script src="./assets/JavaScript/script.js"></script>
   </body>
 </html>
