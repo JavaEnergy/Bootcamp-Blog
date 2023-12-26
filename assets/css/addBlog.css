@@ -59,10 +59,6 @@ main {
   justify-content: center;
   margin-top: 40px;
 }
-.form {
-  /* display: flex;
-  flex-direction: column; */
-}
 
 form h1 {
   font-family: FiraGO-700;
@@ -141,7 +137,7 @@ textarea {
 #arrow-down {
   position: absolute;
   top: 38px;
-  right: 16px;
+  right: 25px;
   cursor: pointer;
 }
 
@@ -171,6 +167,10 @@ textarea {
   margin-top: 8px;
 }
 
+#category.input {
+  /* padding: 5px 0 0 15px; */
+  /* pointer-events: none; */
+}
 form button {
   border-radius: 8px;
   border: none;
@@ -206,6 +206,7 @@ form button {
   border: 1px solid rgba(228, 227, 235, 1);
   border-radius: 12px;
   margin-top: 2px;
+  display: none;
 }
 
 .nav-items {
@@ -241,4 +242,8 @@ form button {
   align-items: center;
 }
 
-/* ../images/white-x.png */
+.input:empty:before {
+  content: attr(data-placeholder);
+  color: rgba(133, 133, 141, 1);
+  padding: 7px 0 0 10px;
+}

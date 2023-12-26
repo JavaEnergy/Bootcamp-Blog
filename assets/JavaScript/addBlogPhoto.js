@@ -3,6 +3,7 @@ const dropArea = document.getElementById("drop-area");
 const fileInput = document.getElementById("fileInput");
 const uploadedFile = document.getElementById("uploadedFile");
 const fileList = document.getElementById("UploadedfileName");
+const array = [];
 
 [
   // Prevent default behavior on dragover and dragenter to enable drop
@@ -71,75 +72,16 @@ deleteImage.addEventListener("click", () => {
   // Optionally, clear the file input to prepare for a new upload
   fileInput.value = "";
 });
-/////////////////////////////////////////////////////
 
-// const dropArea = document.getElementById("drop-area");
-// const fileInput = document.getElementById("fileInput");
-// const uploadedFilesList = document.createElement("ul");
-
-// // Handle drag-and-drop events
-// dropArea.addEventListener("dragover", (event) => {
-//   event.preventDefault();
-//   dropArea.classList.add("dragover");
-// });
-
-// dropArea.addEventListener("dragleave", () => {
-//   dropArea.classList.remove("dragover");
-// });
-
-// dropArea.addEventListener("drop", (event) => {
-//   event.preventDefault();
-//   dropArea.classList.remove("dragover");
-//   handleFiles(event.dataTransfer.files);
-// });
-
-// // Handle file selection from the input
-// fileInput.addEventListener("change", (event) => {
-//   handleFiles(event.target.files);
-// });
-
-// function handleFiles(files) {
-//   for (const file of files) {
-//     const fileName = file.name;
-
-//     // Display feedback to the user
-//     const listItem = document.createElement("li");
-//     listItem.textContent = fileName;
-//     uploadedFilesList.appendChild(listItem);
-//     dropArea.appendChild(uploadedFilesList);
-
-//     // Process the file (e.g., upload to server)
-//     // You'll need to implement this part based on your requirements
-//     console.log("File uploaded:", fileName);
-//   }
-// }
-
-// fetch("https://api.blog.redberryinternship.ge/api/categories")
-//   .then((response) => {
-//     if (!response.ok) {
-//       throw new Error("Network response was not ok");
-//     }
-//     return response.json();
-//   })
-//   .then((jsonData) => {
-//     const navItemsContainer = document.querySelector(".nav-items");
-
-//     jsonData.data.forEach((item, index) => {
-//       const listItem = document.createElement("li");
-//       listItem.textContent = item.title;
-//       listItem.style.color = item.text_color;
-//       listItem.style.backgroundColor = item.background_color;
-
-//       navItemsContainer.appendChild(listItem);
-//     });
-//   })
-//   .catch((error) => {
-//     console.error("There was a problem with the fetch operation:", error);
-//   });
-
+// Function to handle category click
 // Function to handle category click
 function handleCategoryClick(event) {
   const clickedItem = event.target;
+  const itemId = clickedItem.getAttribute("data-item-id"); // Get the item.id
+
+  // Push the item.id into the array
+  array.push(itemId);
+
   const categoryInput = document.getElementById("category");
 
   // Create a span element to hold the clicked category text and image
@@ -166,6 +108,7 @@ function handleCategoryClick(event) {
 
   // Hide the clicked item instead of removing it
   clickedItem.style.display = "none";
+  // console.log(array);
 }
 
 function handleImageClick(event) {
@@ -209,7 +152,11 @@ fetch("https://api.blog.redberryinternship.ge/api/categories")
       listItem.textContent = item.title;
       listItem.style.color = item.text_color;
       listItem.style.backgroundColor = item.background_color;
+      listItem.setAttribute("data-item-id", item.id); // Make sure this line is included
 
+      listItem.addEventListener("click", handleCategoryClick); // Event listener added here
+
+      navItemsContainer.appendChild(listItem);
       // Create the image element (initially hidden)
       const img = document.createElement("img");
       img.src = "../images/white-x.png";
@@ -229,3 +176,58 @@ fetch("https://api.blog.redberryinternship.ge/api/categories")
   .catch((error) => {
     console.error("There was a problem with the fetch operation:", error);
   });
+const arrowDownButton = document.getElementById("arrow-down");
+const navDiv = document.querySelector(".nav");
+
+arrowDownButton.addEventListener("click", () => {
+  function hideOrShowCategories() {
+    if (navDiv.style.display === "none") {
+      navDiv.style.display = "block";
+    } else {
+      navDiv.style.display = "none";
+    }
+  }
+
+  hideOrShowCategories();
+});
+
+const form = document.getElementById("form");
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const author = document.getElementById("author").value;
+  const header = document.getElementById("header").value;
+  const description = document.getElementById("description").value;
+  const date = document.getElementById("date").value;
+  const email = document.getElementById("email").value;
+  const fileInput = document.getElementById("fileInput");
+  const file = fileInput.files[0];
+
+  const formData = new FormData();
+  formData.append("title", header);
+  formData.append("description", description);
+  formData.append("image", file);
+  formData.append("author", author);
+  formData.append("publish_date", date);
+  formData.append("categories", JSON.stringify(array));
+  formData.append("email", email);
+
+  const token =
+    "230c46a6e9f328daedbbbd55ff31ff2aca13a76e4578c2c0318e30d33b3be796";
+
+  axios
+    .post("https://api.blog.redberryinternship.ge/api/blogs", formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      // Handle the response
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+});

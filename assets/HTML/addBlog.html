@@ -18,7 +18,7 @@
         </a>
       </div>
       <section class="form">
-        <form>
+        <form id="form">
           <h1>ბლოგის დამატება</h1>
           <div id="drop-area" class="drop">
             <img src="../images/folder-add.png" alt="" />
@@ -87,7 +87,12 @@
             </div>
             <div class="category" id="categoryContainer">
               <label for="category">კატეგორია *</label> <br />
-              <div id="category" class="input"></div>
+              <div
+                id="category"
+                class="input"
+                contenteditable="true"
+                data-placeholder="აირჩიეთ კატეგორია"
+              ></div>
 
               <img id="arrow-down" src="../images/arrow-down.png" alt="" />
               <section class="nav">
@@ -112,11 +117,12 @@
           </div>
           <br />
           <div class="button">
-            <button>გამოქვეყნება</button>
+            <button id="submitBtn">გამოქვეყნება</button>
           </div>
         </form>
       </section>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../JavaScript/addBlogPhoto.js"></script>
     <script src="../JavaScript/author-header-validate.js"></script>
   </body>

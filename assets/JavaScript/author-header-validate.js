@@ -1,3 +1,26 @@
+const categoryDiv = document.getElementById("category");
+
+categoryDiv.removeAttribute("contenteditable");
+
+document.getElementById("author").addEventListener("input", validateAuthor);
+document.getElementById("header").addEventListener("input", validateHeader);
+document
+  .getElementById("description")
+  .addEventListener("input", validateDescription);
+
+const dateInput = document.getElementById("date");
+dateInput.addEventListener("input", function () {
+  if (this.value) {
+    this.style.borderColor = "rgba(20, 216, 28, 1)";
+    this.style.backgroundColor =
+      "linear-gradient(0deg, #14D81C, #14D81C), linear-gradient(0deg, #F8FFF8, #F8FFF8)";
+  } else {
+    this.style.borderColor = "red";
+    this.style.backgroundColor = "";
+  }
+});
+
+// Function to validate the auhor input
 function validateAuthor() {
   const authorInput = document.getElementById("author").value.trim();
   const authorWords = authorInput
@@ -51,10 +74,7 @@ function validateHeader() {
       "linear-gradient(0deg, rgba(250, 242, 243, 0.1), rgba(250, 242, 243, 0.1))";
   }
 }
-
-// Event listeners to trigger validation on input change
-document.getElementById("author").addEventListener("input", validateAuthor);
-document.getElementById("header").addEventListener("input", validateHeader);
+// Function to validate the description input
 
 function validateDescription() {
   const descriptionInput = document.getElementById("description").value.trim();
@@ -69,7 +89,6 @@ function validateDescription() {
       "linear-gradient(0deg, rgba(248, 255, 248, 0.1), rgba(248, 255, 248, 0.1))";
   } else {
     description.style.borderColor = "red";
-
     descriptionSpan.style.color = "red";
     document.getElementById("description").style.background =
       "linear-gradient(0deg, rgba(234, 25, 25, 0.1), rgba(234, 25, 25, 0.1)), " +
@@ -77,24 +96,11 @@ function validateDescription() {
   }
 }
 
-document
-  .getElementById("description")
-  .addEventListener("input", validateDescription);
-
 /////////////////////////////////////////////////////////
 
-const dateInput = document.getElementById("date");
-dateInput.addEventListener("input", function () {
-  if (this.value) {
-    this.style.borderColor = "rgba(20, 216, 28, 1)";
-    this.style.backgroundColor =
-      "linear-gradient(0deg, #14D81C, #14D81C), linear-gradient(0deg, #F8FFF8, #F8FFF8)";
-  } else {
-    this.style.borderColor = "red";
-    this.style.backgroundColor = "";
-  }
-});
+document.getElementById("email").addEventListener("input", validateEmail);
 
+// Function to validate the mail input
 function validateEmail() {
   const emailInput = document.getElementById("email").value.trim();
   const emailRegex = /@redberry\.ge$/;
@@ -108,11 +114,29 @@ function validateEmail() {
   } else {
     emailError.style.display = "flex";
     email.style.borderColor = "red";
-    overallValidation();
   }
 }
 
-document.getElementById("email").addEventListener("input", validateEmail);
+// Get the category container and the input field
+const categoryInput = document.getElementById("category");
+
+// Add an event listener to track changes
+categoryInput.addEventListener("input", validateCategory);
+
+function validateCategory() {
+  const categoryContainer = document.getElementById("category");
+  const categoryList = categoryContainer.querySelectorAll("span");
+  const categoryValid = categoryList.length > 0;
+  categoryContainer.style.borderColor = categoryValid
+    ? "rgba(20, 216, 28, 1)"
+    : "red";
+  // Check if at least one li element exists
+  if (categoryList.length > 0) {
+    categoryContainer.style.borderColor = "rgba(20, 216, 28, 1)";
+  } else {
+    categoryContainer.style.borderColor = "red";
+  }
+}
 
 function overallValidation() {
   const authorInput = document.getElementById("author").value.trim();
@@ -146,16 +170,9 @@ function overallValidation() {
   } else {
     button.style.backgroundColor = "";
   }
+  validateCategory();
 }
 
-document.getElementById("author").addEventListener("input", overallValidation);
-document.getElementById("header").addEventListener("input", overallValidation);
-document
-  .getElementById("description")
-  .addEventListener("input", overallValidation);
-document.getElementById("date").addEventListener("input", overallValidation);
-
-////// focus
 // /// /// Function to set border style on focus
 function setInputFocusBorder(inputId) {
   const inputField = document.getElementById(inputId);
@@ -163,17 +180,10 @@ function setInputFocusBorder(inputId) {
   inputField.addEventListener("focus", function () {
     this.style.borderColor = "rgba(93, 55, 243, 1)";
   });
-
-  inputField.addEventListener("blur", function () {
-    // Reset border color on blur to initial validation state
-    validateInput(inputId); // Assuming there's a validation function for individual inputs
-  });
 }
 
 // Call setInputFocusBorder for each input field
-setInputFocusBorder("author");
-setInputFocusBorder("header");
-setInputFocusBorder("description");
-setInputFocusBorder("date");
-setInputFocusBorder("email");
-// Add more input fields if needed
+
+["author", "header", "description", "date", "email", "category"].forEach(
+  setInputFocusBorder
+);

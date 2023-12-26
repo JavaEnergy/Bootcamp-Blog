@@ -11,6 +11,9 @@
     <header>
       <img src="./assets/images/LOGO-02 3 (1).png" alt="" />
       <button id="enterButton">შესვლა</button>
+      <a href="./assets/HTML/addBlog.html" class="a-to-addBlog"
+        ><button id="addBlogButon">დაამატე ბლოგი</button></a
+      >
     </header>
     <main>
       <section class="head">
@@ -69,14 +72,21 @@
         </div>
       </div>
       <div class="log-in-success">
+        <img id="closeX" src="./assets/images/x.png" alt="" />
         <!-- image არის შესაცვლელი -->
-        <img src="./assets/images/Vector-success.png" alt="" />
+        <img
+          class="success-png"
+          src="./assets/images/Vector-success.png"
+          alt=""
+        />
         <!-- image არის შესაცვლელი -->
         <h1>წარმატებული ავტორიზაცია</h1>
-        <button>კარგი</button>
+        <button id="okButton">კარგი</button>
       </div>
       <div class="backdrop"></div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- <script src="/assets/JavaScript/log-in.js"></script> -->
     <script src="./assets/JavaScript/script.js"></script>
   </body>
 </html>

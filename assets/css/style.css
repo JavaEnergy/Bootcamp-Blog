@@ -132,10 +132,12 @@ main {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+a {
+  text-decoration: none;
+}
 .blog a {
   font-size: 14px;
   color: rgba(93, 55, 243, 1);
-  text-decoration: none;
 }
 
 .pointer:hover {
@@ -236,7 +238,7 @@ main {
   border-radius: 12px;
   display: none;
 }
-.log-in-success img {
+.log-in-success .success-png {
   max-width: 100%;
   width: 53px;
   height: 53px;
@@ -262,4 +264,22 @@ main {
 
 button {
   cursor: pointer;
+}
+
+#closeX {
+  width: 24px;
+  height: 24px;
+  text-align: right;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+}
+
+#addBlogButon {
+  display: none;
+}
+
+.a-to-addBlog {
+  display: none;
 }
