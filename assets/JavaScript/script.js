@@ -50,7 +50,7 @@ loginButton.addEventListener("click", async (event) => {
   const email = emailInput.value;
 
   const token =
-    "230c46a6e9f328daedbbbd55ff31ff2aca13a76e4578c2c0318e30d33b3be796";
+    "d74bdc613d9bb82292c47558b64a59b82db56ca5ade0eaf52966a41d5d046da9";
 
   try {
     const response = await axios.post(
@@ -97,11 +97,10 @@ okButton.addEventListener("click", displayAddBtn);
 closeX.addEventListener("click", displayAddBtn);
 function fetchAndPopulateBlog() {
   const token =
-    "5f733e9b34d7ffcd08bc75c6b9b117d13ae07bd6b4fb53207d3f504d15a07197";
-  const id = 1;
+    "d74bdc613d9bb82292c47558b64a59b82db56ca5ade0eaf52966a41d5d046da9"; // Your token goes here
 
   axios
-    .get(`https://api.blog.redberryinternship.ge/api/blogs/${id}`, {
+    .get(`https://api.blog.redberryinternship.ge/api/blogs`, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${token}`,
@@ -109,24 +108,34 @@ function fetchAndPopulateBlog() {
     })
     .then((response) => {
       const responseData = response.data;
+
       const blogSection = document.querySelector(".blogs");
-      const blogTemplate = `
-      <div class="blog">
-        <img class="main-img" src="${responseData.image}" alt="" />
-        <h2>${responseData.author}</h2>
-        <h6>${responseData.publish_date}</h6>
-        <h1>${responseData.title}</h1>
-        <div class="categories">
-          ${responseData.categories
-            .map((category) => `<span>${category.title}</span>`)
-            .join("")}
-        </div>
-        <p>${responseData.description}</p>
-        <a href="#">სრულად ნახვა</a>
-        <img class="arrow pointer" src="./assets/images/Arrow 1.png" alt="" />
-      </div>
-    `;
-      blogSection.innerHTML = blogTemplate;
+
+      responseData.data.forEach((blogEntry) => {
+        const blogTemplate = `
+            <div class="blog">
+              <img class="main-img" src="${blogEntry.image}" alt="" />
+              <h2>${blogEntry.author}</h2>
+              <h6>${blogEntry.publish_date}</h6>
+              <h1>${blogEntry.title}</h1>
+              <div class="categories">
+                ${blogEntry.categories
+                  .map(
+                    (category) => `
+                      <span style="background-color: ${category.background_color}; color: ${category.text_color};">${category.title}</span>
+                    `
+                  )
+                  .join("")}
+              </div>
+              <p>${blogEntry.description}</p>
+              <div class="full">
+              <a href="#">სრულად ნახვა</a>
+              <img class="arrow pointer"  src="./assets/images/Arrow 1.png" alt="" /> </div>
+            </div>
+          `;
+        blogSection.innerHTML += blogTemplate;
+        console.log(blogEntry.categories);
+      });
     })
     .catch((error) => {
       console.error("Error fetching blog data:", error);

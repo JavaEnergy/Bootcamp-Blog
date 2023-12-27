@@ -11,9 +11,10 @@ document
 const dateInput = document.getElementById("date");
 dateInput.addEventListener("input", function () {
   if (this.value) {
-    this.style.borderColor = "rgba(20, 216, 28, 1)";
+    this.style.borderColor = "green";
     this.style.backgroundColor =
       "linear-gradient(0deg, #14D81C, #14D81C), linear-gradient(0deg, #F8FFF8, #F8FFF8)";
+    fullValidation();
   } else {
     this.style.borderColor = "red";
     this.style.backgroundColor = "";
@@ -43,15 +44,14 @@ function validateAuthor() {
   georgianSpan.style.color = georgianValid ? "green" : "red";
 
   authorInputField.style.borderColor =
-    symbolsValid && wordsValid && georgianValid
-      ? "rgba(20, 216, 28, 1)"
-      : "red";
+    symbolsValid && wordsValid && georgianValid ? "green" : "red";
   authorInputField.style.background =
     symbolsValid && wordsValid && georgianValid
       ? "linear-gradient(0deg, rgba(20, 216, 28, 0.1), rgba(20, 216, 28, 0.1)), " +
         "linear-gradient(0deg, rgba(248, 255, 248, 0.1), rgba(248, 255, 248, 0.1))"
       : "linear-gradient(0deg, rgba(234, 25, 25, 0.1), rgba(234, 25, 25, 0.1)), " +
         "linear-gradient(0deg, rgba(250, 242, 243, 0.1), rgba(250, 242, 243, 0.1))";
+  fullValidation();
 }
 
 // Function to validate the header input
@@ -62,7 +62,7 @@ function validateHeader() {
 
   if (headerInput.length >= 2) {
     headerSpan.style.color = "green";
-    headerInputField.style.borderColor = "rgba(20, 216, 28, 1)";
+    headerInputField.style.borderColor = "green";
     headerInputField.style.background =
       "linear-gradient(0deg, rgba(20, 216, 28, 0.1), rgba(20, 216, 28, 0.1)), " +
       "linear-gradient(0deg, rgba(248, 255, 248, 0.1), rgba(248, 255, 248, 0.1))";
@@ -73,6 +73,7 @@ function validateHeader() {
       "linear-gradient(0deg, rgba(234, 25, 25, 0.1), rgba(234, 25, 25, 0.1)), " +
       "linear-gradient(0deg, rgba(250, 242, 243, 0.1), rgba(250, 242, 243, 0.1))";
   }
+  fullValidation();
 }
 // Function to validate the description input
 
@@ -94,6 +95,7 @@ function validateDescription() {
       "linear-gradient(0deg, rgba(234, 25, 25, 0.1), rgba(234, 25, 25, 0.1)), " +
       "linear-gradient(0deg, rgba(250, 242, 243, 0.1), rgba(250, 242, 243, 0.1))";
   }
+  fullValidation();
 }
 
 /////////////////////////////////////////////////////////
@@ -115,6 +117,7 @@ function validateEmail() {
     emailError.style.display = "flex";
     email.style.borderColor = "red";
   }
+  fullValidation();
 }
 
 // Get the category container and the input field
@@ -127,50 +130,13 @@ function validateCategory() {
   const categoryContainer = document.getElementById("category");
   const categoryList = categoryContainer.querySelectorAll("span");
   const categoryValid = categoryList.length > 0;
-  categoryContainer.style.borderColor = categoryValid
-    ? "rgba(20, 216, 28, 1)"
-    : "red";
+  categoryContainer.style.borderColor = categoryValid ? "green" : "red";
   // Check if at least one li element exists
   if (categoryList.length > 0) {
-    categoryContainer.style.borderColor = "rgba(20, 216, 28, 1)";
+    categoryContainer.style.borderColor = "green";
   } else {
     categoryContainer.style.borderColor = "red";
   }
-}
-
-function overallValidation() {
-  const authorInput = document.getElementById("author").value.trim();
-  const headerInput = document.getElementById("header").value.trim();
-  const descriptionInput = document.getElementById("description").value.trim();
-  const dateInput = document.getElementById("date").value.trim();
-  const emailInput = document.getElementById("email").value.trim();
-  const button = document.querySelector(".button button");
-
-  const authorSymbolsValid = authorInput.length >= 4;
-  const authorWordsValid =
-    authorInput.split(/\s+/).filter((word) => word.length > 0).length >= 2;
-  const authorGeorgianValid = /^[\u10D0-\u10FF\s]+$/.test(authorInput);
-
-  const headerValid = headerInput.length >= 2;
-  const descriptionValid = descriptionInput.length >= 2;
-  const dateValid = dateInput !== "";
-  const emailValid = /@redberry\.ge$/.test(emailInput);
-
-  const allRequirementsMet =
-    authorSymbolsValid &&
-    authorWordsValid &&
-    authorGeorgianValid &&
-    headerValid &&
-    descriptionValid &&
-    dateValid &&
-    emailValid;
-
-  if (allRequirementsMet) {
-    button.style.backgroundColor = "rgba(93, 55, 243, 1)";
-  } else {
-    button.style.backgroundColor = "";
-  }
-  validateCategory();
 }
 
 // /// /// Function to set border style on focus
@@ -187,3 +153,256 @@ function setInputFocusBorder(inputId) {
 ["author", "header", "description", "date", "email", "category"].forEach(
   setInputFocusBorder
 );
+
+const dropArea = document.getElementById("drop-area");
+const fileInput = document.getElementById("fileInput");
+const uploadedFile = document.getElementById("uploadedFile");
+const fileList = document.getElementById("UploadedfileName");
+const array = [];
+
+[
+  // Prevent default behavior on dragover and dragenter to enable drop
+  ("dragover", "dragenter"),
+].forEach((eventName) => {
+  dropArea.addEventListener(eventName, (e) => {
+    e.preventDefault();
+    dropArea.classList.add("highlight");
+  });
+});
+
+// Remove highlighting on dragleave and drop
+["dragleave", "drop"].forEach((eventName) => {
+  dropArea.addEventListener(eventName, () => {
+    dropArea.classList.remove("highlight");
+  });
+});
+
+// Handle file drop
+dropArea.addEventListener("drop", (e) => {
+  e.preventDefault();
+  const files = e.dataTransfer.files;
+  handleFiles(files);
+});
+
+// Handle selected files from input
+fileInput.addEventListener("change", () => {
+  const files = fileInput.files;
+  handleFiles(files);
+});
+
+// Function to handle uploaded files
+function handleFiles(files) {
+  for (const file of files) {
+    displayFileInfo(file);
+    // uploadFile(file);
+
+    // Hide drop area and show uploadedFile
+    dropArea.style.display = "none";
+    uploadedFile.style.display = "block";
+    fullValidation();
+  }
+}
+
+// Function to display uploaded file info
+function displayFileInfo(file) {
+  const fileNameDiv = document.createElement("div");
+  fileNameDiv.textContent = `${file.name}`;
+  fileList.textContent = `${file.name}`;
+}
+
+function uploadFile(file) {
+  console.log(`Uploading ${file.name}...`);
+}
+
+const deleteImage = document.getElementById("deleteImage");
+
+// Add event listener for deleting the image
+deleteImage.addEventListener("click", () => {
+  // Clear file name display
+  fileList.textContent = "";
+
+  // Hide uploadedFile and show drop area
+  uploadedFile.style.display = "none";
+  dropArea.style.display = "block";
+
+  fileInput.value = "";
+});
+
+function handleCategoryClick(event) {
+  const clickedItem = event.target;
+  const itemId = clickedItem.getAttribute("data-item-id"); // Get the item.id
+
+  // Push the item.id into the array
+  array.push(itemId);
+  function checkBorder() {
+    if (array.length > 0) {
+      categoryDiv.style.borderColor = "green";
+    }
+  }
+  checkBorder();
+  fullValidation();
+
+  const categoryInput = document.getElementById("category");
+
+  // Create a span element to hold the clicked category text and image
+  const categorySpan = document.createElement("span");
+  categorySpan.textContent = clickedItem.textContent;
+  categorySpan.style.color = clickedItem.style.color;
+  categorySpan.style.backgroundColor = clickedItem.style.backgroundColor;
+  categorySpan.style.borderRadius = "30px";
+  categorySpan.style.padding = "8px 16px";
+  categorySpan.style.marginRight = "5px"; // Adjust spacing between categories
+
+  // Append the image to the category span
+  categorySpan.appendChild(clickedItem.querySelector("img"));
+
+  // Make the image visible and add the click listener
+  categorySpan.querySelector("img").style.display = "block";
+  categorySpan.querySelector("img").addEventListener("click", handleImageClick);
+
+  // Append the span element to the input field
+  categoryInput.appendChild(categorySpan);
+
+  // Clear the clicked item's text content
+  clickedItem.textContent = "";
+
+  // Hide the clicked item instead of removing it
+  clickedItem.style.display = "none";
+  // console.log(array);
+}
+
+function handleImageClick(event) {
+  const clickedImg = event.target;
+  const categorySpan = clickedImg.parentElement;
+  const navItemsContainer = document.querySelector(".nav-items");
+
+  // Create a new list item to hold the category
+  const listItem = document.createElement("li");
+  listItem.textContent = categorySpan.textContent;
+  listItem.style.color = categorySpan.style.color;
+  listItem.style.backgroundColor = categorySpan.style.backgroundColor;
+
+  // Append the image to the list item (but keep it hidden)
+  listItem.appendChild(clickedImg);
+  clickedImg.style.display = "none"; // Hide the image
+
+  // Add a click listener to the list item
+  listItem.addEventListener("click", handleCategoryClick);
+
+  // Append the list item to the nav items
+  navItemsContainer.appendChild(listItem);
+
+  // Remove the category span from the input field
+  categorySpan.remove();
+}
+
+// Fetch categories from API
+fetch("https://api.blog.redberryinternship.ge/api/categories")
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  })
+  .then((jsonData) => {
+    const navItemsContainer = document.querySelector(".nav-items");
+
+    jsonData.data.forEach((item, index) => {
+      const listItem = document.createElement("li");
+      listItem.textContent = item.title;
+      listItem.style.color = item.text_color;
+      listItem.style.backgroundColor = item.background_color;
+      listItem.setAttribute("data-item-id", item.id);
+
+      listItem.addEventListener("click", handleCategoryClick); // Event listener added here
+
+      navItemsContainer.appendChild(listItem);
+      // Create the image element (initially hidden)
+      const img = document.createElement("img");
+      img.src = "../images/white-x.png";
+      img.alt = "Close icon";
+      img.style.width = "16px";
+      img.style.height = "16px";
+      img.style.marginLeft = "5px";
+      img.style.display = "none"; // Hide the image initially
+
+      listItem.appendChild(img);
+
+      listItem.addEventListener("click", handleCategoryClick);
+
+      navItemsContainer.appendChild(listItem);
+    });
+  })
+  .catch((error) => {
+    console.error("There was a problem with the fetch operation:", error);
+  });
+const arrowDownButton = document.getElementById("arrow-down");
+const navDiv = document.querySelector(".nav");
+
+arrowDownButton.addEventListener("click", () => {
+  function hideOrShowCategories() {
+    if (navDiv.style.display === "none") {
+      navDiv.style.display = "block";
+    } else {
+      navDiv.style.display = "none";
+    }
+  }
+
+  hideOrShowCategories();
+});
+
+const form = document.getElementById("form");
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const author = document.getElementById("author").value;
+  const header = document.getElementById("header").value;
+  const description = document.getElementById("description").value;
+  const date = document.getElementById("date").value;
+  const email = document.getElementById("email").value;
+  const fileInput = document.getElementById("fileInput");
+  const file = fileInput.files[0];
+
+  const formData = new FormData();
+  formData.append("title", header);
+  formData.append("description", description);
+  formData.append("image", file);
+  formData.append("author", author);
+  formData.append("publish_date", date);
+  formData.append("categories", JSON.stringify(array));
+  formData.append("email", email);
+
+  const token =
+    "d74bdc613d9bb82292c47558b64a59b82db56ca5ade0eaf52966a41d5d046da9";
+
+  axios
+    .post("https://api.blog.redberryinternship.ge/api/blogs", formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((data) => {
+      console.log(data);
+      window.location.href = "/index.html";
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+});
+
+function fullValidation() {
+  const button = document.querySelector(".button button");
+
+  if (
+    document.getElementById("author").style.borderColor == "green" &&
+    document.getElementById("header").style.borderColor == "green" &&
+    document.getElementById("description").style.borderColor == "green" &&
+    document.getElementById("date").style.borderColor == "green" &&
+    document.getElementById("email").style.borderColor == "green" &&
+    document.getElementById("uploadedFile").style.display == "block" &&
+    array.length > 0
+  ) {
+    button.style.backgroundColor = "rgba(93, 55, 243, 1)";
+  }
+}
