@@ -214,7 +214,7 @@ form.addEventListener("submit", function (event) {
   formData.append("email", email);
 
   const token =
-    "230c46a6e9f328daedbbbd55ff31ff2aca13a76e4578c2c0318e30d33b3be796";
+    "5f733e9b34d7ffcd08bc75c6b9b117d13ae07bd6b4fb53207d3f504d15a07197";
 
   axios
     .post("https://api.blog.redberryinternship.ge/api/blogs", formData, {
@@ -222,7 +222,6 @@ form.addEventListener("submit", function (event) {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((response) => response.json())
     .then((data) => {
       console.log(data);
       // Handle the response

@@ -38,50 +38,42 @@ function back() {
   logInWindow.style.display = "none";
   backdrop.style.display = "none";
 }
-
 xButton.addEventListener("click", back);
 
 const loginButton = document.querySelector(".log-in button");
 const emailInput = document.querySelector("#email");
 const errorDiv = document.querySelector(".error");
 
-const emailRegex = /@redberry\.ge$/;
+loginButton.addEventListener("click", async (event) => {
+  event.preventDefault(); // Prevent default form submission
 
-loginButton.addEventListener("click", async () => {
   const email = emailInput.value;
-
-  if (!emailRegex.test(email)) {
-    errorDiv.style.display = "flex";
-    return;
-  } else {
-    errorDiv.style.display = "none";
-  }
 
   const token =
     "230c46a6e9f328daedbbbd55ff31ff2aca13a76e4578c2c0318e30d33b3be796";
 
-  axios
-    .post(
+  try {
+    const response = await axios.post(
       "https://api.blog.redberryinternship.ge/api/login",
-      {
-        email: email,
-      },
+      { email },
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
-    )
+    );
 
-    .then((data) => {
-      const successDiv = document.querySelector(".log-in-success");
-      const prevDiv = document.getElementById("logIn");
-      successDiv.style.display = "block";
-      prevDiv.style.display = "none";
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+    const successDiv = document.querySelector(".log-in-success");
+    const prevDiv = document.getElementById("logIn");
+    successDiv.style.display = "block";
+    prevDiv.style.display = "none";
+  } catch (error) {
+    console.error("Error:", error);
+
+    // Display error message to the user
+    errorDiv.style.display = "flex";
+    errorDiv.querySelector(".error-p").innerText = "ელ-ფოსტა არ მოიძებნა";
+  }
 });
 
 const okButton = document.getElementById("okButton");
@@ -103,3 +95,43 @@ function displayAddBtn() {
 
 okButton.addEventListener("click", displayAddBtn);
 closeX.addEventListener("click", displayAddBtn);
+function fetchAndPopulateBlog() {
+  const token =
+    "5f733e9b34d7ffcd08bc75c6b9b117d13ae07bd6b4fb53207d3f504d15a07197";
+  const id = 1;
+
+  axios
+    .get(`https://api.blog.redberryinternship.ge/api/blogs/${id}`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      const responseData = response.data;
+      const blogSection = document.querySelector(".blogs");
+      const blogTemplate = `
+      <div class="blog">
+        <img class="main-img" src="${responseData.image}" alt="" />
+        <h2>${responseData.author}</h2>
+        <h6>${responseData.publish_date}</h6>
+        <h1>${responseData.title}</h1>
+        <div class="categories">
+          ${responseData.categories
+            .map((category) => `<span>${category.title}</span>`)
+            .join("")}
+        </div>
+        <p>${responseData.description}</p>
+        <a href="#">სრულად ნახვა</a>
+        <img class="arrow pointer" src="./assets/images/Arrow 1.png" alt="" />
+      </div>
+    `;
+      blogSection.innerHTML = blogTemplate;
+    })
+    .catch((error) => {
+      console.error("Error fetching blog data:", error);
+      // Handle errors
+    });
+}
+
+fetchAndPopulateBlog();
