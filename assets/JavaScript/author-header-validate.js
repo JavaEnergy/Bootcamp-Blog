@@ -21,7 +21,7 @@ dateInput.addEventListener("input", function () {
   }
 });
 
-// Function to validate the auhor input
+///// Function to validate the auhor input
 function validateAuthor() {
   const authorInput = document.getElementById("author").value.trim();
   const authorWords = authorInput
@@ -54,7 +54,7 @@ function validateAuthor() {
   fullValidation();
 }
 
-// Function to validate the header input
+///// Function to validate the header input
 function validateHeader() {
   const headerInput = document.getElementById("header").value.trim();
   const headerInputField = document.getElementById("header");
@@ -75,7 +75,7 @@ function validateHeader() {
   }
   fullValidation();
 }
-// Function to validate the description input
+/////// Function to validate the description input
 
 function validateDescription() {
   const descriptionInput = document.getElementById("description").value.trim();
@@ -98,11 +98,9 @@ function validateDescription() {
   fullValidation();
 }
 
-/////////////////////////////////////////////////////////
-
 document.getElementById("email").addEventListener("input", validateEmail);
 
-// Function to validate the mail input
+///// Function to validate the mail input
 function validateEmail() {
   const emailInput = document.getElementById("email").value.trim();
   const emailRegex = /@redberry\.ge$/;
@@ -154,32 +152,40 @@ function setInputFocusBorder(inputId) {
   setInputFocusBorder
 );
 
+/////   add image code-start
+
 const dropArea = document.getElementById("drop-area");
 const fileInput = document.getElementById("fileInput");
 const uploadedFile = document.getElementById("uploadedFile");
 const fileList = document.getElementById("UploadedfileName");
 const array = [];
 
-[
-  // Prevent default behavior on dragover and dragenter to enable drop
-  ("dragover", "dragenter"),
-].forEach((eventName) => {
+["dragover", "dragenter"].forEach((eventName) => {
   dropArea.addEventListener(eventName, (e) => {
     e.preventDefault();
+    e.stopPropagation(); // Stop propagation to prevent further handling
     dropArea.classList.add("highlight");
   });
 });
 
 // Remove highlighting on dragleave and drop
 ["dragleave", "drop"].forEach((eventName) => {
-  dropArea.addEventListener(eventName, () => {
+  dropArea.addEventListener(eventName, (e) => {
+    e.preventDefault();
+    e.stopPropagation(); // Stop propagation to prevent further handling
     dropArea.classList.remove("highlight");
+
+    if (eventName === "drop") {
+      const files = e.dataTransfer.files;
+      handleFiles(files);
+    }
   });
 });
 
 // Handle file drop
 dropArea.addEventListener("drop", (e) => {
   e.preventDefault();
+  e.stopPropagation(); // Stop propagation to prevent further handling
   const files = e.dataTransfer.files;
   handleFiles(files);
 });
@@ -228,6 +234,12 @@ deleteImage.addEventListener("click", () => {
   fileInput.value = "";
 });
 
+/////   add image code-end
+
+///////////////////////////////////////////////////////////////////////
+
+///// category
+
 function handleCategoryClick(event) {
   const clickedItem = event.target;
   const itemId = clickedItem.getAttribute("data-item-id"); // Get the item.id
@@ -251,7 +263,9 @@ function handleCategoryClick(event) {
   categorySpan.style.backgroundColor = clickedItem.style.backgroundColor;
   categorySpan.style.borderRadius = "30px";
   categorySpan.style.padding = "8px 16px";
-  categorySpan.style.marginRight = "5px"; // Adjust spacing between categories
+  categorySpan.style.marginRight = "5px";
+
+  // Adjust spacing between categories
 
   // Append the image to the category span
   categorySpan.appendChild(clickedItem.querySelector("img"));
@@ -296,7 +310,7 @@ function handleImageClick(event) {
   categorySpan.remove();
 }
 
-// Fetch categories from API
+////// Fetch categories from API
 fetch("https://api.blog.redberryinternship.ge/api/categories")
   .then((response) => {
     if (!response.ok) {
@@ -336,6 +350,10 @@ fetch("https://api.blog.redberryinternship.ge/api/categories")
   .catch((error) => {
     console.error("There was a problem with the fetch operation:", error);
   });
+////// Fetch categories from API end
+
+/////  arrow down button
+
 const arrowDownButton = document.getElementById("arrow-down");
 const navDiv = document.querySelector(".nav");
 
@@ -350,6 +368,8 @@ arrowDownButton.addEventListener("click", () => {
 
   hideOrShowCategories();
 });
+
+///// make posts
 
 const form = document.getElementById("form");
 
@@ -390,6 +410,10 @@ form.addEventListener("submit", function (event) {
       console.error("Error:", error);
     });
 });
+
+///// make posts - end
+
+////// validate button
 
 function fullValidation() {
   const button = document.querySelector(".button button");

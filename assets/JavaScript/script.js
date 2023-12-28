@@ -1,3 +1,5 @@
+/////// fetch categories from server
+
 fetch("https://api.blog.redberryinternship.ge/api/categories")
   .then((response) => {
     if (!response.ok) {
@@ -21,6 +23,11 @@ fetch("https://api.blog.redberryinternship.ge/api/categories")
     console.error("There was a problem with the fetch operation:", error);
   });
 
+/////// fetch categories from server-end
+
+/////////////////////////////////////////////////////////
+///////  log-in, backdrop, enter-add-blog-btn
+
 const enterButton = document.getElementById("enterButton");
 const logInWindow = document.getElementById("logIn");
 const backdrop = document.querySelector(".backdrop");
@@ -43,6 +50,29 @@ xButton.addEventListener("click", back);
 const loginButton = document.querySelector(".log-in button");
 const emailInput = document.querySelector("#email");
 const errorDiv = document.querySelector(".error");
+
+///////  log-in, backdrop, enter-add-blog-btn  --- end
+
+const navItems = document.querySelectorAll(".nav-items li");
+
+navItems.forEach((item) => {
+  item.addEventListener("click", (event) => {
+    console.log(item.textContent);
+    console.log("clicked");
+  });
+});
+
+///////////////
+// document.querySelectorAll(".nav-items li").forEach((item) => {
+
+//   console.log(item.textContent) })
+///////////////
+// document.querySelectorAll(".categories span").forEach((item) => {
+
+//   console.log(item.textContent) })
+////////////////////
+
+///// log-in email check
 
 loginButton.addEventListener("click", async (event) => {
   event.preventDefault(); // Prevent default form submission
@@ -93,8 +123,22 @@ function displayAddBtn() {
   aHref.style.display = "block";
 }
 
+///////// get blogs
+
+///// Store the Blog Data for filter
+
 okButton.addEventListener("click", displayAddBtn);
 closeX.addEventListener("click", displayAddBtn);
+let filterStatus = {};
+
+function updateFilterStatus(category) {
+  if (filterStatus[category]) {
+    delete filterStatus[category];
+  } else {
+    filterStatus[category] = true;
+  }
+}
+
 function fetchAndPopulateBlog() {
   const token =
     "d74bdc613d9bb82292c47558b64a59b82db56ca5ade0eaf52966a41d5d046da9";
@@ -136,6 +180,40 @@ function fetchAndPopulateBlog() {
           </div>
         `;
         blogSection.innerHTML += blogTemplate;
+
+        /////////// filter blogs
+
+        const navItems = document.querySelectorAll(".nav-items li");
+
+        navItems.forEach((navItem) => {
+          navItem.addEventListener("click", (event) => {
+            const clickedCategory = event.target.textContent;
+            updateFilterStatus(clickedCategory);
+
+            const blogs = document.querySelectorAll(".blogs .blog");
+
+            // Filter blogs based on the clicked category
+            blogs.forEach((blog) => {
+              const blogCategories = blog.querySelectorAll(".categories span");
+              let isMatchingCategory = false;
+
+              blogCategories.forEach((blogCategory) => {
+                if (blogCategory.textContent === clickedCategory) {
+                  isMatchingCategory = true;
+                }
+              });
+
+              if (isMatchingCategory) {
+                blog.style.display = "block";
+              } else {
+                blog.style.display = "none";
+              }
+            });
+
+            // Change the background color of the clicked category
+            navItem.style.border = "3px solid black";
+          });
+        });
       });
 
       // Event listener to handle the click on "Read More" links
