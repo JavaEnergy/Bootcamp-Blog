@@ -58,6 +58,7 @@ header button {
   max-width: 720px;
   width: 100%;
   margin-bottom: 40px;
+  max-height: 400px;
 }
 #mainBlogDescr {
   max-height: 820px;

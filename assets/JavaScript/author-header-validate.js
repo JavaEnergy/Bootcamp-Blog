@@ -404,7 +404,8 @@ form.addEventListener("submit", function (event) {
     })
     .then((data) => {
       console.log(data);
-      window.location.href = "/index.html";
+      document.querySelector(".log-in-success").style.display = "block";
+      document.querySelector(".backdrop").style.display = "block";
     })
     .catch((error) => {
       console.error("Error:", error);
