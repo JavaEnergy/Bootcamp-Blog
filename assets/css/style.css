@@ -120,6 +120,8 @@ main {
   border-radius: 30px;
   font-size: 12px;
   margin-right: 16px;
+  margin-bottom: auto;
+  margin-top: auto;
 }
 .blog .categories span:hover {
   cursor: pointer;

@@ -51,6 +51,7 @@ header button {
   line-height: 28px;
   color: rgba(26, 26, 31, 1);
   max-width: 720px;
+  height: 100%;
 }
 
 .main-blog img {
@@ -58,7 +59,10 @@ header button {
   width: 100%;
   margin-bottom: 40px;
 }
-
+#mainBlogDescr {
+  max-height: 820px;
+  overflow: auto;
+}
 .main-blog h6 {
   font-size: 12px;
   font-family: FiraGO-400;
@@ -74,8 +78,9 @@ header button {
 }
 
 .main-blog .categories {
-  overflow-x: auto;
   max-width: 100%;
+  max-height: 120px;
+  align-items: center;
 }
 .main-blog .categories span {
   padding: 6px 10px;
