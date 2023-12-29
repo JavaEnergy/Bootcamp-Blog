@@ -197,6 +197,11 @@ form button {
   display: none;
 }
 
+.email-error img {
+  width: 16px;
+  height: 16px;
+}
+
 .email-error p {
   color: rgba(234, 25, 25, 1);
 }
