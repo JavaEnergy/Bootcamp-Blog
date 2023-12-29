@@ -131,11 +131,11 @@ function displayAddBtn() {
 okButton.addEventListener("click", displayAddBtn);
 closeX.addEventListener("click", displayAddBtn);
 
-function updateFilterStatus(category) {
-  if (filterStatus[category]) {
-    delete filterStatus[category];
+function updateFilterStatus(clickedCategory) {
+  if (filterStatus.hasOwnProperty(clickedCategory)) {
+    filterStatus[clickedCategory] = !filterStatus[clickedCategory];
   } else {
-    filterStatus[category] = true;
+    filterStatus[clickedCategory] = true;
   }
 }
 
@@ -196,8 +196,8 @@ function fetchAndPopulateBlog() {
             } else {
               navItem.style.border = "3px solid black";
             }
-
             const blogs = document.querySelectorAll(".blogs .blog");
+            let shouldDisplayAllBlogs = true;
 
             // Filter blogs based on the clicked category
             blogs.forEach((blog) => {
@@ -206,7 +206,10 @@ function fetchAndPopulateBlog() {
 
               blogCategories.forEach((blogCategory) => {
                 if (
-                  Object.keys(filterStatus).includes(blogCategory.textContent)
+                  Object.keys(filterStatus).includes(
+                    blogCategory.textContent
+                  ) &&
+                  filterStatus[blogCategory.textContent]
                 ) {
                   isMatchingCategory = true;
                 }
@@ -214,20 +217,17 @@ function fetchAndPopulateBlog() {
 
               if (isMatchingCategory) {
                 blog.style.display = "block";
+                shouldDisplayAllBlogs = false;
               } else {
                 blog.style.display = "none";
               }
             });
 
-            // Change the background color of the clicked category
-            if (!Object.keys(filterStatus).length) {
-              isMatchingCategory = true;
-            }
-
-            if (isMatchingCategory) {
-              blog.style.display = "block";
-            } else {
-              blog.style.display = "none";
+            // If all categories are set to false, display all blogs
+            if (shouldDisplayAllBlogs) {
+              blogs.forEach((blog) => {
+                blog.style.display = "block";
+              });
             }
           });
         });
