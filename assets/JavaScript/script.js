@@ -1,4 +1,5 @@
 /////// fetch categories from server
+let filterStatus = {};
 
 fetch("https://api.blog.redberryinternship.ge/api/categories")
   .then((response) => {
@@ -129,7 +130,6 @@ function displayAddBtn() {
 
 okButton.addEventListener("click", displayAddBtn);
 closeX.addEventListener("click", displayAddBtn);
-let filterStatus = {};
 
 function updateFilterStatus(category) {
   if (filterStatus[category]) {
@@ -187,8 +187,15 @@ function fetchAndPopulateBlog() {
 
         navItems.forEach((navItem) => {
           navItem.addEventListener("click", (event) => {
-            const clickedCategory = event.target.textContent;
+            let clickedCategory = event.target.textContent;
+
             updateFilterStatus(clickedCategory);
+
+            if (navItem.style.borderColor == "black") {
+              navItem.style.border = "none";
+            } else {
+              navItem.style.border = "3px solid black";
+            }
 
             const blogs = document.querySelectorAll(".blogs .blog");
 
@@ -198,7 +205,9 @@ function fetchAndPopulateBlog() {
               let isMatchingCategory = false;
 
               blogCategories.forEach((blogCategory) => {
-                if (blogCategory.textContent === clickedCategory) {
+                if (
+                  Object.keys(filterStatus).includes(blogCategory.textContent)
+                ) {
                   isMatchingCategory = true;
                 }
               });
@@ -211,7 +220,15 @@ function fetchAndPopulateBlog() {
             });
 
             // Change the background color of the clicked category
-            navItem.style.border = "3px solid black";
+            if (!Object.keys(filterStatus).length) {
+              isMatchingCategory = true;
+            }
+
+            if (isMatchingCategory) {
+              blog.style.display = "block";
+            } else {
+              blog.style.display = "none";
+            }
           });
         });
       });
